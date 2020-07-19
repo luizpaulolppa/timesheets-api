@@ -3,7 +3,7 @@ import { getCustomRepository } from "typeorm";
 import { UserRepository } from "../repositories/UserRepository";
 import AppError from "../errors/AppError";
 import { compare } from "bcryptjs";
-import authConfig from '../config/auth';
+import authConfig from '../config/authConfig';
 import { sign } from "jsonwebtoken";
 
 export default class SessionsService {

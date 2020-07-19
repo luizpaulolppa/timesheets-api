@@ -2,7 +2,8 @@ import UserDTO from "../dtos/UserDTO";
 import { getCustomRepository } from "typeorm";
 import AppError from "../errors/AppError";
 import { hash } from 'bcryptjs';
-import { UserRepository } from '../repositories/UserRepository'
+import { UserRepository } from '../repositories/UserRepository';
+import MailService from './MailService';
 
 export default class UserService {
 
@@ -34,6 +35,11 @@ export default class UserService {
       password: hashedPassword
     });
     await userRepository.save(user);
+
+    try {
+      const mailService = new MailService();
+      await mailService.sendConfirmation(user);
+    } catch(ex) { }
 
     return {
       id: user.id,
