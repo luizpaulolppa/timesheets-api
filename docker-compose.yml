@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 3333:3333
+      - 9229:9229 # This port is specific for debugging the App NodeJS
+    links:
+      - db
+  db:
+    image: postgres:12.1
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: timesheet_db_dev
+    ports: ["5432:5432"]
+    expose: ["5432"]
