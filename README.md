@@ -2,3 +2,4 @@
 
 ## Para criar uma nova Migration
 ### yarn typeorm migration:create -n MIGRATION_NAME
+### yarn typeorm migration:run
